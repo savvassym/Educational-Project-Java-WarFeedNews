@@ -10,4 +10,5 @@ class WnfApplicationTests {
 	void contextLoads() {
 	}
 
+
 }

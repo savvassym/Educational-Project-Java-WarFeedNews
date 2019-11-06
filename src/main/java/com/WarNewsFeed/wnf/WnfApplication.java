@@ -12,7 +12,7 @@ import java.util.List;
 public class WnfApplication {
 
 	public static void main(String[] args) throws TwitterException {
-		//SpringApplication.run(WnfApplication.class, args);
+		SpringApplication.run(WnfApplication.class, args);
 
 		List<Status> status;
 		TwitterApi twitterApi = new TwitterApi();

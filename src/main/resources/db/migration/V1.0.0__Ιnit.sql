@@ -1,0 +1,6 @@
+create table TwitterDB(
+Id IDENTITY NOT NULL PRIMARY KEY,
+Country VARCHAR(50) NOT NULL,
+Location VARCHAR(50) NOT NULL UNIQUE,
+Timestamps VARCHAR(50) NOT NULL);
+

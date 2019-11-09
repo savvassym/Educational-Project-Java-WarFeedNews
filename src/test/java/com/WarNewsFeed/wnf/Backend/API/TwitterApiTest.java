@@ -1,11 +1,11 @@
-package Backend.API;
+package com.WarNewsFeed.wnf.Backend.API;
 
 import twitter4j.Status;
 import twitter4j.TwitterException;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 public class TwitterApiTest {
 

@@ -1,4 +1,4 @@
-package Backend.API;
+package com.WarNewsFeed.wnf.Backend.API;
 
 import twitter4j.Status;
 import twitter4j.Twitter;

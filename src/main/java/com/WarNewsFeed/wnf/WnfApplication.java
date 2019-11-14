@@ -16,10 +16,9 @@ public class WnfApplication {
 
 	public static void main(String[] args) throws TwitterException, SQLException, ClassNotFoundException {
 		SpringApplication.run(WnfApplication.class, args);
-		List<Status> status;
+	    List<Status> status;
 		TwitterApi twitterApi = new TwitterApi();
-		twitterApi.twitterConnection();
-		status = twitterApi.getData();
+		status = twitterApi.getTwitterPosts();
 		for(Status st : status) {
 			System.out.println(st.getUser().getName()+"========"+st.getText());
 		}

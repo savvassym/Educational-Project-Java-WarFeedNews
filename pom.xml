@@ -64,6 +64,12 @@
 			<version>3.9.2</version>
 		</dependency>
 		<dependency>
+			<groupId>com.byteowls</groupId>
+			<artifactId>jopencage</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+
+		<dependency>
             <groupId>org.twitter4j</groupId>
             <artifactId>twitter4j-core</artifactId>
 			<version>4.0.7</version>

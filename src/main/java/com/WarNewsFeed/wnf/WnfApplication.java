@@ -1,5 +1,6 @@
 package com.WarNewsFeed.wnf;
 
+import com.WarNewsFeed.wnf.Backend.API.GeocodeApi;
 import com.WarNewsFeed.wnf.Backend.API.TwitterApi;
 import com.WarNewsFeed.wnf.Backend.NLP.Nlp;
 import com.WarNewsFeed.wnf.Backend.model.Tweet;
@@ -33,6 +34,9 @@ public class WnfApplication {
 
 		tweetService.getAllTweets();
 
+		//In country we put the userInput
+		GeocodeApi geocodeApi = new GeocodeApi();
+		System.out.println(geocodeApi.getCoordinates("greece"));
 
 //	    List<Status> status;
 //		TwitterApi twitterApi = new TwitterApi();

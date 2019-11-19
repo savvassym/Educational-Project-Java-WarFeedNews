@@ -16,7 +16,6 @@ public class GeocodeApi {
     public Map<Double,Double> getCoordinates(String country)
     {
         JOpenCageForwardRequest request = new JOpenCageForwardRequest(country);
-
         JOpenCageResponse response = jOpenCageGeocoder.forward(request);
         JOpenCageResult x =response.getResults().get(0);
         longitude=x.getGeometry().getLng();

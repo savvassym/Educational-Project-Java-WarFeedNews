@@ -25,15 +25,15 @@ public class WnfApplication {
 		ApplicationContext context = SpringApplication.run(WnfApplication.class, args);
 		TweetService tweetService = context.getBean(TweetService.class);
 
-//		Tweet tweet = new Tweet();
-//		tweet.setTid("1");
-//		tweet.setCountry("England");
-//		tweet.setTime_stamp(null);
-//		tweet.setCoordinates("3428349238");
-//
-//		tweetService.insertTweet(tweet);
-//
-//		tweetService.getAllTweets();
+		Tweet tweet = new Tweet();
+		tweet.setTid("1");
+		tweet.setCountry("England");
+		tweet.setTime_stamp(null);
+		tweet.setCoordinates("3428349238");
+
+		tweetService.insertTweet(tweet);
+
+		tweetService.getAllTweets();
 
 		Map<Double,Double> test = new HashMap<>();
 		//In country we put the userInput

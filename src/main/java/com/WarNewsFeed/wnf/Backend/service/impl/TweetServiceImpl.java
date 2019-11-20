@@ -37,4 +37,12 @@ public class TweetServiceImpl implements TweetService {
         Tweet tweet = tweetDao.getTweetById(tweetId);
         System.out.println(tweet);
     }
+
+    @Override
+    public void getTweetsByCountry(String country) {
+        List<Tweet> tweets = tweetDao.getTweetsByCountry(country);
+        for (Tweet tweet : tweets){
+            System.out.println(tweet.toString());
+        }
+    }
 }

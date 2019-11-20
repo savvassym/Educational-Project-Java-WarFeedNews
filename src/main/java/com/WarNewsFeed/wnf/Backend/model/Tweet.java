@@ -1,9 +1,11 @@
 package com.WarNewsFeed.wnf.Backend.model;
 
+import java.sql.Timestamp;
+
 public class Tweet {
     private String tid;
     private String country;
-    private String time_stamp;
+    private Timestamp time_stamp;
     private String coordinates;
 
     public String getTid() {
@@ -22,11 +24,11 @@ public class Tweet {
         this.country = country;
     }
 
-    public String getTime_stamp() {
+    public Timestamp getTime_stamp() {
         return time_stamp;
     }
 
-    public void setTime_stamp(String time_stamp) {
+    public void setTime_stamp(Timestamp time_stamp) {
         this.time_stamp = time_stamp;
     }
 

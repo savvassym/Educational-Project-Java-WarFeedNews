@@ -9,4 +9,5 @@ public interface TweetService {
     void insertTweets(List<Tweet> tweets);
     void getAllTweets();
     void getTweetById(String tweetId);
+    void getTweetsByCountry(String country);
 }

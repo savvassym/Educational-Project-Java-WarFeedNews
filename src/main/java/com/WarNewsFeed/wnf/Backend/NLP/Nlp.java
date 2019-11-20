@@ -4,7 +4,6 @@ import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
-import edu.stanford.nlp.pipeline.StanfordCoreNLPClient;
 import edu.stanford.nlp.util.CoreMap;
 
 import java.util.HashMap;
@@ -15,7 +14,7 @@ import java.util.Properties;
 public class Nlp {
 
     private Map<String,String> collect = new HashMap<>();
-    private Map<String,String> collect1 = new HashMap<>();
+//    private Map<String,String> collect1 = new HashMap<>();
 
 
     public Map<String, String> analyzer(String input){

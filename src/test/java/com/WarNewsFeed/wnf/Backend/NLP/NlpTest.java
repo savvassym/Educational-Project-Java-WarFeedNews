@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 public class NlpTest {
 
     @Test
-    public void analyzer() {
+    public void testThatGreeceIsRecognisedAsACountryAndAthensAsACity() {
         Map<String, String> haslist;
         Map<String, String> expected = new HashMap<>();
         Nlp nlp = new Nlp();
@@ -21,7 +21,7 @@ public class NlpTest {
     }
 
     @Test
-    public void analyzer1(){
+    public void testThatCountryIsRecognisedWhenMixedWithOtherWords(){
         Map<String, String> list;
         Map<String, String> expected = new HashMap<>();
         Nlp nlp = new Nlp();

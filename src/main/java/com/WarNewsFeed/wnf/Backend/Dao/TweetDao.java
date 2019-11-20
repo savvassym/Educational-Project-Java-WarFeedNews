@@ -9,4 +9,5 @@ public interface TweetDao {
     void insertTweets(List<Tweet> tweets);
     List<Tweet> getAllTweets();
     Tweet getTweetById(String tweetId);
+    List<Tweet> getTweetsByCountry(String country);
 }

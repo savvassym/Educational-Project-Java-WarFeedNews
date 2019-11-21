@@ -1,6 +1,7 @@
 package com.WarNewsFeed.wnf;
 
 import com.WarNewsFeed.wnf.Backend.API.GeocodeApi;
+import com.WarNewsFeed.wnf.Backend.Parsing.ReadingInput;
 import com.WarNewsFeed.wnf.Backend.model.Tweet;
 import com.WarNewsFeed.wnf.Backend.service.TweetService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,11 @@ public class WnfApplication {
 		tweetService.insertTweet(tweet);
 
 		tweetService.getAllTweets();
+
+		String userInput;
+		userInput = ReadingInput.GettingInput();
+		tweetService.getConflictsByCountry(userInput);
+
 
 		Map<Double,Double> test = new HashMap<>();
 		//In country we put the userInput

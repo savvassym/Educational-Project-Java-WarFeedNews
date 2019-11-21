@@ -98,6 +98,24 @@ public class TweetDaoImpl extends JdbcDaoSupport implements TweetDao {
     }
 
     @Override
+    public List<Tweet> getTweetsByCountry(String country) {
+        String sql = "SELECT * FROM tweet WHERE country = ?";
+        assert getJdbcTemplate() != null;
+        List<Map<String, Object>> rows = getJdbcTemplate().queryForList(sql, country);
+        List<Tweet> res = new ArrayList<>();
+        for(Map<String, Object> row : rows){
+            Tweet tweet = new Tweet();
+            tweet.setTid((String) row.get("tid"));
+            tweet.setCountry((String) row.get("country"));
+            tweet.setTime_stamp((Timestamp) row.get("time_stamp"));
+            tweet.setCoordinates((String) row.get("coordinates"));
+            res.add(tweet);
+        }
+        return res;
+    }
+
+
+    @Override
     public String getConflictsByCountry(String country) {
         String sql = "SELECT COUNT(*) FROM tweet WHERE country = ?";
         assert getJdbcTemplate() != null;

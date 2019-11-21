@@ -10,6 +10,7 @@ public interface TweetDao {
     int[] insertTweets(List<Tweet> tweets);
     List<Tweet> getAllTweets();
     Tweet getTweetById(String tweetId);
+    List<Tweet> getTweetsByCountry(String country);
     String getConflictsByCountry(String country);
     int  findConflictsByTime(String country, Timestamp timeUp, Timestamp timeTo);
 }

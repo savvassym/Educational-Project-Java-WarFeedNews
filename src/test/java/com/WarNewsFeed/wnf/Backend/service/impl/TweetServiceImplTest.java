@@ -24,8 +24,8 @@ public class TweetServiceImplTest extends JdbcDaoSupport {
         ApplicationContext context = SpringApplication.run(WnfApplication.class);
         TweetService service = context.getBean(TweetService.class);
         Tweet tweet = new Tweet();
-        tweet.setTid("4");
-        tweet.setCountry("Greece");
+        tweet.setTid("7");
+        tweet.setCountry("Germany");
         tweet.setTime_stamp(Timestamp.valueOf("2019-11-21 14:19:30.554"));
         tweet.setCoordinates("2393281");
         int actual = service.insertTweet(tweet);
@@ -62,13 +62,6 @@ public class TweetServiceImplTest extends JdbcDaoSupport {
         ApplicationContext context = SpringApplication.run(WnfApplication.class);
         TweetService service = context.getBean(TweetService.class);
         List<Tweet> actual = service.getAllTweets();
-//        Tweet tweet1 = new Tweet("1","Greece",Timestamp.valueOf("2019-11-21 14:19:30.554000000"),"2393281");
-//        Tweet tweet2 = new Tweet("2","TestCountry1",Timestamp.valueOf("2019-11-21 14:41:20.550000000"),"1234");
-//        Tweet tweet3 = new Tweet("3","TestCountry2",Timestamp.valueOf("2019-11-21 14:41:20.550000000"),"4567");
-//        List<Tweet> expected = new ArrayList<>();
-//        expected.add(tweet1);
-//        expected.add(tweet2);
-//        expected.add(tweet3);
         Assert.assertTrue(actual.size()>0);
         SpringApplication.exit(context,()->0);
     }
@@ -77,7 +70,7 @@ public class TweetServiceImplTest extends JdbcDaoSupport {
     public void TestThatDatabaseResponseToGetTweetByID() {
         ApplicationContext context = SpringApplication.run(WnfApplication.class);
         TweetService service = context.getBean(TweetService.class);
-        Tweet response = service.getTweetById("1");
+        Tweet response = service.getTweetById("4");
         Assert.assertNotNull(response);
         SpringApplication.exit(context,()->0);
     }
@@ -90,4 +83,14 @@ public class TweetServiceImplTest extends JdbcDaoSupport {
         Assert.assertTrue(response.size()>0);
         SpringApplication.exit(context,()->0);
     }
+
+    @Test
+    public void TestThatDbResponseToQueryfindConfilcsByTimestamp() {
+        ApplicationContext context = SpringApplication.run(WnfApplication.class);
+        TweetService service = context.getBean(TweetService.class);
+        int response = service.findConflictsByTime("Greece", Timestamp.valueOf("2019-11-21 14:19:30.554"), Timestamp.valueOf("2019-11-25 22:42:48.000000000"));
+        Assert.assertTrue(response>0);
+        SpringApplication.exit(context, () -> 0);
+    }
+
 }

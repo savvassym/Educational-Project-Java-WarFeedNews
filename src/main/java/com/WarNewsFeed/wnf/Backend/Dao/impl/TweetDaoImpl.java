@@ -26,29 +26,30 @@ public class TweetDaoImpl extends JdbcDaoSupport implements TweetDao {
     DataSource dataSource;
 
     @PostConstruct
-    private void initialize(){
+    public void initialize(){
         setDataSource(dataSource);
     }
 
     @Override
-    public void insertTweet(Tweet tweet) {
+    public int insertTweet(Tweet tweet) {
         String sql = "INSERT INTO TWEET "+"(TID, COUNTRY, TIME_STAMP, COORDINATES) VALUES (?, ?, ?, ?);";
         assert getJdbcTemplate() != null;
-        getJdbcTemplate().update(sql, tweet.getTid(), tweet.getCountry(), tweet.getTime_stamp(), tweet.getCoordinates());
+        int res = getJdbcTemplate().update(sql, tweet.getTid(), tweet.getCountry(), tweet.getTime_stamp(), tweet.getCoordinates());
+        return res;
     }
 
     @Override
-    public void insertTweets(List<Tweet> tweets) {
+    public int[] insertTweets(List<Tweet> tweets) {
         String sql = "INSERT INTO TWEET "+"(TID, COUNTRY, TIME_STAMP, COORDINATES) VALUES (?, ?, ?, ?)";
         assert getJdbcTemplate() != null;
-        getJdbcTemplate().batchUpdate(sql, new BatchPreparedStatementSetter() {
+        int[] k = getJdbcTemplate().batchUpdate(sql, new BatchPreparedStatementSetter() {
             @Override
             public void setValues(PreparedStatement preparedStatement, int i) throws SQLException {
                 Tweet tweet = tweets.get(i);
-                preparedStatement.setString(1,tweet.getTid());
-                preparedStatement.setString(2,tweet.getCountry());
-                preparedStatement.setTimestamp(3,tweet.getTime_stamp());
-                preparedStatement.setString(4,tweet.getCoordinates());
+                preparedStatement.setString(1, tweet.getTid());
+                preparedStatement.setString(2, tweet.getCountry());
+                preparedStatement.setTimestamp(3, tweet.getTime_stamp());
+                preparedStatement.setString(4, tweet.getCoordinates());
             }
 
             @Override
@@ -56,6 +57,7 @@ public class TweetDaoImpl extends JdbcDaoSupport implements TweetDao {
                 return tweets.size();
             }
         });
+        return k;
     }
 
     @Override

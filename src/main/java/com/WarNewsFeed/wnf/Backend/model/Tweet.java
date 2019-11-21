@@ -8,6 +8,16 @@ public class Tweet {
     private Timestamp time_stamp;
     private String coordinates;
 
+    public Tweet() {
+    }
+
+    public Tweet(String tid, String country, Timestamp time_stamp, String coordinates) {
+        this.tid = tid;
+        this.country = country;
+        this.time_stamp = time_stamp;
+        this.coordinates = coordinates;
+    }
+
     public String getTid() {
         return tid;
     }

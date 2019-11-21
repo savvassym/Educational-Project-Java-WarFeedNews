@@ -15,34 +15,30 @@ public class TweetServiceImpl implements TweetService {
     TweetDao tweetDao;
 
     @Override
-    public void insertTweet(Tweet tweet) {
-        tweetDao.insertTweet(tweet);
+    public int insertTweet(Tweet tweet) {
+        return tweetDao.insertTweet(tweet);
     }
 
     @Override
-    public void insertTweets(List<Tweet> tweets) {
-        tweetDao.insertTweets(tweets);
+    public int[] insertTweets(List<Tweet> tweets) {
+        return tweetDao.insertTweets(tweets);
     }
 
     @Override
-    public void getAllTweets() {
+    public List<Tweet> getAllTweets() {
         List<Tweet> tweets = tweetDao.getAllTweets();
-        for(Tweet tweet : tweets){
-            System.out.println(tweet.toString());
-        }
+        return tweets;
     }
 
     @Override
-    public void getTweetById(String tweetId) {
+    public Tweet getTweetById(String tweetId) {
         Tweet tweet = tweetDao.getTweetById(tweetId);
-        System.out.println(tweet);
+        return tweet;
     }
 
     @Override
-    public void getTweetsByCountry(String country) {
+    public List<Tweet> getTweetsByCountry(String country) {
         List<Tweet> tweets = tweetDao.getTweetsByCountry(country);
-        for (Tweet tweet : tweets){
-            System.out.println(tweet.toString());
-        }
+        return tweets;
     }
 }

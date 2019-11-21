@@ -42,6 +42,7 @@ public class WnfApplication {
 		tweetService.getConflictsByCountry(userInput);
 
 
+
 		Map<Double,Double> test = new HashMap<>();
 		//In country we put the userInput
 		GeocodeApi geocodeApi = new GeocodeApi();

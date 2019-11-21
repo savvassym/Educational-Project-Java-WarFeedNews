@@ -6,6 +6,7 @@ import com.WarNewsFeed.wnf.Backend.service.TweetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -28,6 +29,11 @@ public class TweetServiceImpl implements TweetService {
     public List<Tweet> getAllTweets() {
         List<Tweet> tweets = tweetDao.getAllTweets();
         return tweets;
+    }
+
+    @Override
+    public int findConflictsByTime(String country, Timestamp timeUp, Timestamp timeTo) {
+        return tweetDao.findConflictsByTime(country,timeUp,timeTo);
     }
 
     @Override

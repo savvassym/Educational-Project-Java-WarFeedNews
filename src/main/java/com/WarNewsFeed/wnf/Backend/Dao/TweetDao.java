@@ -2,6 +2,7 @@ package com.WarNewsFeed.wnf.Backend.Dao;
 
 import com.WarNewsFeed.wnf.Backend.model.Tweet;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface TweetDao {
@@ -10,4 +11,5 @@ public interface TweetDao {
     List<Tweet> getAllTweets();
     Tweet getTweetById(String tweetId);
     List<Tweet> getTweetsByCountry(String country);
+    int  findConflictsByTime(String country, Timestamp timeUp, Timestamp timeTo);
 }

@@ -1,17 +1,29 @@
 package com.WarNewsFeed.wnf.Backend.API;
 
 import org.junit.Test;
-import twitter4j.Status;
-import twitter4j.TwitterException;
-import java.util.List;
-import static org.junit.Assert.assertNotNull;
+import org.mockito.Mockito;
+import twitter4j.*;
+import java.util.*;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 public class TwitterApiTest {
-
+    
     @Test
-    public void getTwitterPosts() throws TwitterException {
-        TwitterApi connection = new TwitterApi();
-        List<Status> data = connection.getTwitterPosts();
-        assertNotNull(data);
+    public void TestGetTwitterPostsWhenListOfStatusIsEmpty() throws TwitterException {
+        TwitterApi twitterApiMock = mock(TwitterApi.class);
+        when(twitterApiMock.getTwitterPosts()).thenReturn(new ArrayList<>());
+        List<String> expected = new ArrayList<>();
+        List<Status> result = twitterApiMock.getTwitterPosts();
+        assertEquals(result,expected);
     }
-}
+
+    @Test(expected = RuntimeException.class)
+    public void TestGetTwitterPostsWhenIsException() throws TwitterException {
+        List<Status> list = (List<Status>) mock(TwitterApi.class);
+        when(list.get(Mockito.anyInt())).thenThrow(
+                new RuntimeException("Something went wrong"));
+        list.get(0);
+    }
+    
+    }

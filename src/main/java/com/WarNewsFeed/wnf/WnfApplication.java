@@ -10,10 +10,7 @@ import org.springframework.context.ApplicationContext;
 import twitter4j.TwitterException;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @SpringBootApplication
 public class WnfApplication {
@@ -25,16 +22,52 @@ public class WnfApplication {
 		TweetService tweetService = context.getBean(TweetService.class);
 		Date date = new Date();
 		long time = date.getTime();
+		List<Tweet> listok = new ArrayList<>();
+		listok=tweetService.getTweetsByCountry("Greece");
+		for(Tweet t: listok){
+			System.out.println(t.toString());
+		}
 
-		Tweet tweet = new Tweet();
-		tweet.setTid("5");
-		tweet.setCountry("TestTimeStamp");
-		tweet.setTime_stamp(new Timestamp(time));
-		tweet.setCoordinates("3428349238");
+		List<String> clist = Arrays.asList("Greece","France","Germany","England");
+//		Tweet tweet = new Tweet();
+//		tweet.setTid("5");
+//		tweet.setCountry("TestTimeStamp2");
+//		tweet.setTime_stamp(Timestamp.valueOf("1983-07-12 21:30:55.888"));
+//		tweet.setCoordinates("3428349238");
 
-		tweetService.insertTweet(tweet);
+//		for(int i=0;i<=3;i++){
+//			Tweet tweet1 = new Tweet();
+//			tweet1.setTid(Integer.toString(i));
+//			tweet1.setCountry(clist.get(i));
+//			tweet1.setTime_stamp(new Timestamp(time));
+//			tweet1.setCoordinates(Double.toString(Math.random()));
+//			tweetService.insertTweet(tweet1);
+//		}
 
-		tweetService.getAllTweets();
+//		Tweet tweet1 = new Tweet();
+//		tweet1.setTid("5");
+//		tweet1.setCountry("Turkey");
+//		tweet1.setTime_stamp(new Timestamp(time));
+//		tweet1.setCoordinates(Double.toString(Math.random()));
+//
+//
+//		Tweet tweet2 = new Tweet();
+//		tweet2.setTid("6");
+//		tweet2.setCountry("Israel");
+//		tweet2.setTime_stamp(new Timestamp(time));
+//		tweet2.setCoordinates(Double.toString(Math.random()));
+//
+//		List<Tweet> l = new ArrayList<>();
+//		l.add(tweet1);
+//		l.add(tweet2);
+//
+//		int k[] = tweetService.insertTweets(l);
+//
+//		tweetService.getAllTweets();
+
+
+
+//		tweetService.getAllTweets();
 
 		Map<Double,Double> test = new HashMap<>();
 		//In country we put the userInput

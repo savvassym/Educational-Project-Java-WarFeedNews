@@ -12,4 +12,5 @@ public interface TweetDao {
     Tweet getTweetById(String tweetId);
     List<Tweet> getTweetsByCountry(String country);
     int  findConflictsByTime(String country, Timestamp timeUp, Timestamp timeTo);
+    List<Tweet> sortByCountry();
 }

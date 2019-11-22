@@ -37,6 +37,15 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
+    public List<Tweet> sortByCountry() {
+        List<Tweet> tweets = tweetDao.sortByCountry();
+        for(Tweet tweet : tweets){
+            System.out.println(tweet.getCountry());
+        }
+        return tweets;
+    }
+
+    @Override
     public Tweet getTweetById(String tweetId) {
         Tweet tweet = tweetDao.getTweetById(tweetId);
         return tweet;

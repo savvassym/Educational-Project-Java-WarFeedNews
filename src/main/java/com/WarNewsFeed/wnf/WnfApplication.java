@@ -65,9 +65,6 @@ public class WnfApplication {
 //		int k[] = tweetService.insertTweets(l);
 //
 //		tweetService.getAllTweets();
-
-
-
 //		tweetService.getAllTweets();
 
 		String userInput;
@@ -81,6 +78,8 @@ public class WnfApplication {
 		GeocodeApi geocodeApi = new GeocodeApi();
 		test=geocodeApi.getCoordinates("greece");
 
+
+		tweetService.sortByCountry();
 
 //	    List<Status> status;
 //		TwitterApi twitterApi = new TwitterApi();

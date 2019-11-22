@@ -9,7 +9,6 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -116,12 +115,10 @@ public class TweetDaoImpl extends JdbcDaoSupport implements TweetDao {
 
 
     @Override
-    public String getConflictsByCountry(String country) {
-        String sql = "SELECT COUNT(*) FROM tweet WHERE country = ?";
-        assert getJdbcTemplate() != null;
-        ResultSet resultSet = (ResultSet) getJdbcTemplate().queryForMap(sql);
-         return resultSet.toString();
-
+    public int getConflictsByCountry(String country) {
+        String sql = "SELECT COUNT(COUNTRY) FROM TWEET WHERE COUNTRY ='"+country+"'";
+        int count = getJdbcTemplate().queryForObject(sql, Integer.class);
+        return count;
     }
 
     @Override

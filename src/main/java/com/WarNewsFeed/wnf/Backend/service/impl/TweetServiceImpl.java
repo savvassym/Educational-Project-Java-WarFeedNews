@@ -49,8 +49,7 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
-    public void getConflictsByCountry(String country) {
-        String conflicts = tweetDao.getConflictsByCountry(country);
-        System.out.println("In " + country + " where made "+ conflicts);
+    public int getConflictsByCountry(String country) {
+        return tweetDao.getConflictsByCountry(country);
     }
 }

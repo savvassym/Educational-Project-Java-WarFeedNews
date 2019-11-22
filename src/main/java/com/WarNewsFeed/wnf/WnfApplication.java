@@ -72,8 +72,8 @@ public class WnfApplication {
 
 		String userInput;
 		userInput = ReadingInput.GettingInput();
-		tweetService.getConflictsByCountry(userInput);
-
+		int numberOfConflicts = tweetService.getConflictsByCountry(userInput);
+		System.out.println(numberOfConflicts);
 
 
 		Map<Double,Double> test = new HashMap<>();

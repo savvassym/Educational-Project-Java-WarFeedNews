@@ -120,4 +120,18 @@ public class TweetDaoImpl extends JdbcDaoSupport implements TweetDao {
         int countOfConflictsNamedAtUserInput = this.getJdbcTemplate().queryForObject(sql, Integer.class);
         return countOfConflictsNamedAtUserInput;
     }
+
+    @Override
+    public List<Tweet> sortByCountry() {
+        String sql = "SELECT COUNTRY FROM TWEET ORDER BY COUNTRY ASC " ;
+        assert getJdbcTemplate() != null;
+        List<Map<String, Object>> rows = getJdbcTemplate().queryForList(sql);
+        List<Tweet> result = new ArrayList<Tweet>();
+        for(Map<String, Object> row : rows){
+            Tweet tweet = new Tweet();
+            tweet.setCountry((String) row.get("country"));
+            result.add(tweet);
+        }
+        return result;
+    }
 }

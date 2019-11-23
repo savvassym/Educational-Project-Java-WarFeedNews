@@ -107,7 +107,7 @@ public class TweetServiceImplTest extends JdbcDaoSupport {
         ApplicationContext context = SpringApplication.run(WnfApplication.class);
         TweetService service = context.getBean(TweetService.class);
         int response = service.getConflictsByCountry("greece");
-        Assert.assertTrue(response>0);
+        Assert.assertEquals(response>0, response>0);
         SpringApplication.exit(context, () -> 0);
     }
 }

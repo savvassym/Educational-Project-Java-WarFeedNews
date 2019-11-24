@@ -72,12 +72,11 @@ public class WnfApplication {
 		int numberOfConflicts = tweetService.getConflictsByCountry(userInput);
 		System.out.println(numberOfConflicts);
 
-
-		Map<Double,Double> test = new HashMap<>();
 		//In country we put the userInput
 		GeocodeApi geocodeApi = new GeocodeApi();
+		String test;
 		test=geocodeApi.getCoordinates("greece");
-
+		System.out.println(test);
 
 		tweetService.sortByCountry();
 

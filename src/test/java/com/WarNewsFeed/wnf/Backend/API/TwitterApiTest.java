@@ -1,21 +1,26 @@
 package com.WarNewsFeed.wnf.Backend.API;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
-import twitter4j.*;
-import java.util.*;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import twitter4j.Status;
+import twitter4j.TwitterException;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 public class TwitterApiTest {
-    
+
+
     @Test
     public void TestGetTwitterPostsWhenListOfStatusIsEmpty() throws TwitterException {
         TwitterApi twitterApiMock = mock(TwitterApi.class);
         when(twitterApiMock.getTwitterPosts()).thenReturn(new ArrayList<>());
         List<String> expected = new ArrayList<>();
         List<Status> result = twitterApiMock.getTwitterPosts();
-        assertEquals(result,expected);
+        Assert.assertEquals(result,expected);
     }
 
     @Test(expected = RuntimeException.class)

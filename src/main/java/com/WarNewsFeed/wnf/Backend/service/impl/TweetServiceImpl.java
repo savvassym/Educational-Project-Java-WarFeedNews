@@ -56,4 +56,9 @@ public class TweetServiceImpl implements TweetService {
         List<Tweet> tweets = tweetDao.getTweetsByCountry(country);
         return tweets;
     }
+
+    @Override
+    public int getConflictsByCountry(String country) {
+        return tweetDao.getConflictsByCountry(country);
+    }
 }

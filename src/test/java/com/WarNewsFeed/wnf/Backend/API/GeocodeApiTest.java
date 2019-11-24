@@ -12,32 +12,31 @@ import static org.junit.Assert.*;
 public class GeocodeApiTest {
 
     @Test
-    public void getCoordinates() {
+    public void testGetCoordinates() {
         String inputCountry="greece";
-        Map<Double,Double> list;
-        Map<Double,Double> expectedOutput = new HashMap<>();
+        String list;
+        String expectedOutput = "38.9953683  21.9877132";
         GeocodeApi geocodeApi = new GeocodeApi();
         list=geocodeApi.getCoordinates(inputCountry);
-        expectedOutput.put(38.9953683,21.9877132);
         assertEquals(list,expectedOutput);
     }
     @Test
-    public void getCoordinates2() {
+    public void testGetCoordinatesForMultipleCountries() {
         int i;
         List<String> inputCountry=new ArrayList<>();
         inputCountry.add("GREECE");
         inputCountry.add("Germany");
         inputCountry.add("Syria");
         inputCountry.add("Turkey");
-        Map<Double,Double> list = new HashMap<>() ;
-        Map<Double,Double> expectedOutput = new HashMap<>();
-        expectedOutput.put(38.9953683,21.9877132);
-        expectedOutput.put(51.0834196,10.4234469);
-        expectedOutput.put(34.6401861,39.0494106);
-        expectedOutput.put(38.9597594,34.9249653);
+        List<String> list = new ArrayList<>() ;
+        List<String> expectedOutput = new ArrayList<>();
+        expectedOutput.add("38.9953683  21.9877132");
+        expectedOutput.add("51.0834196  10.4234469");
+        expectedOutput.add("34.6401861  39.0494106");
+        expectedOutput.add("38.9597594  34.9249653");
         GeocodeApi geocodeApi = new GeocodeApi();
         for(i=0;i<inputCountry.size();i++) {
-            list = geocodeApi.getCoordinates(inputCountry.get(i));
+            list.add(i,geocodeApi.getCoordinates(inputCountry.get(i)));
         }
         assertEquals(list, expectedOutput);
     }

@@ -8,13 +8,13 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TweetServiceImplTest extends JdbcDaoSupport {
+
+public class TweetServiceImplTest{
     @Autowired
     TweetService service;
 
@@ -24,7 +24,7 @@ public class TweetServiceImplTest extends JdbcDaoSupport {
         ApplicationContext context = SpringApplication.run(WnfApplication.class);
         TweetService service = context.getBean(TweetService.class);
         Tweet tweet = new Tweet();
-        tweet.setTid("7");
+        tweet.setTid("2");
         tweet.setCountry("Germany");
         tweet.setTime_stamp(Timestamp.valueOf("2019-11-21 14:19:30.554"));
         tweet.setCoordinates("2393281");
@@ -39,12 +39,12 @@ public class TweetServiceImplTest extends JdbcDaoSupport {
         ApplicationContext context = SpringApplication.run(WnfApplication.class);
         TweetService service = context.getBean(TweetService.class);
         Tweet tweet = new Tweet();
-        tweet.setTid("5");
+        tweet.setTid("3");
         tweet.setCountry("TestCountry3");
         tweet.setTime_stamp(Timestamp.valueOf("2019-11-21 14:41:20.55"));
         tweet.setCoordinates("1234");
         Tweet tweet1 = new Tweet();
-        tweet1.setTid("6");
+        tweet1.setTid("4");
         tweet1.setCountry("TestCountry4");
         tweet1.setTime_stamp(Timestamp.valueOf("2019-11-21 14:41:20.55"));
         tweet1.setCoordinates("4567");
@@ -70,7 +70,7 @@ public class TweetServiceImplTest extends JdbcDaoSupport {
     public void TestThatDatabaseResponseToGetTweetByID() {
         ApplicationContext context = SpringApplication.run(WnfApplication.class);
         TweetService service = context.getBean(TweetService.class);
-        Tweet response = service.getTweetById("4");
+        Tweet response = service.getTweetById("3");
         Assert.assertNotNull(response);
         SpringApplication.exit(context,()->0);
     }
@@ -79,7 +79,7 @@ public class TweetServiceImplTest extends JdbcDaoSupport {
     public void TestThatDatabaseResponseToGetTweetsByCountry() {
         ApplicationContext context = SpringApplication.run(WnfApplication.class);
         TweetService service = context.getBean(TweetService.class);
-        List<Tweet> response = service.getTweetsByCountry("Greece");
+        List<Tweet> response = service.getTweetsByCountry("Germany");
         Assert.assertTrue(response.size()>0);
         SpringApplication.exit(context,()->0);
     }
@@ -88,7 +88,7 @@ public class TweetServiceImplTest extends JdbcDaoSupport {
     public void TestThatDbResponseToQueryfindConfilcsByTimestamp() {
         ApplicationContext context = SpringApplication.run(WnfApplication.class);
         TweetService service = context.getBean(TweetService.class);
-        int response = service.findConflictsByTime("Greece", Timestamp.valueOf("2019-11-21 14:19:30.554"), Timestamp.valueOf("2019-11-25 22:42:48.000000000"));
+        int response = service.findConflictsByTime("Germany", Timestamp.valueOf("2019-11-21 14:19:10.554"), Timestamp.valueOf("2019-11-25 22:42:48.000000000"));
         Assert.assertTrue(response>0);
         SpringApplication.exit(context, () -> 0);
     }

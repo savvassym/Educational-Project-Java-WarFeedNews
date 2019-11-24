@@ -80,6 +80,11 @@ public class WnfApplication {
 
 
 		tweetService.sortByCountry();
+		
+		tweetService.sortByTimestamp();
+
+
+
 
 //	    List<Status> status;
 //		TwitterApi twitterApi = new TwitterApi();

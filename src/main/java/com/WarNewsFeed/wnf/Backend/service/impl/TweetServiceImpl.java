@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Service
-public class TweetServiceImpl implements TweetService {
+public class  TweetServiceImpl implements TweetService {
 
     @Autowired
     TweetDao tweetDao;
@@ -59,6 +59,18 @@ public class TweetServiceImpl implements TweetService {
 
     @Override
     public int getConflictsByCountry(String country) {
+
         return tweetDao.getConflictsByCountry(country);
     }
+
+    @Override
+    public List<Tweet> sortByTimestamp(){
+        List<Tweet> result = tweetDao.sortByTimestamp();
+        for(Tweet tweet : result){
+            System.out.println(tweet);
+        }
+        return result;
+    }
+
+
 }

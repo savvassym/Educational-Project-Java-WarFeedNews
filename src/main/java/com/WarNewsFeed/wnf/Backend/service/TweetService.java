@@ -14,4 +14,5 @@ public interface TweetService {
     int  findConflictsByTime(String country, Timestamp timeUp, Timestamp timeTo);
     int getConflictsByCountry(String country);
     List<Tweet> sortByCountry();
+    List<Tweet> sortByTimestamp();
 }

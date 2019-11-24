@@ -146,6 +146,18 @@ public class TweetDaoImpl extends JdbcDaoSupport implements TweetDao {
 
     @Override
     public List<Tweet> sortByTimestamp(){
-
+        String sqlQuery = "SELECT * FROM TWEET ORDER BY TIME_STAMP ASC";
+        assert getJdbcTemplate() != null;
+        List<Map<String, Object>> rows = getJdbcTemplate().queryForList(sqlQuery);
+        List<Tweet> result = new ArrayList<Tweet>();
+        for(Map<String, Object> row : rows){
+            Tweet rowOfTweet = new Tweet();
+            rowOfTweet.setTid((String) row.get("tid"));
+            rowOfTweet.setCountry((String) row.get("country"));
+            rowOfTweet.setTime_stamp((Timestamp) row.get("time_stamp"));
+            rowOfTweet.setCoordinates((String) row.get("coordinates"));
+            result.add(rowOfTweet);
+        }
+        return result;
     }
 }

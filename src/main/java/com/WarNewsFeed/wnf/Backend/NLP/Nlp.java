@@ -19,7 +19,7 @@ public class Nlp {
 
     public Map<String, String> analyzer(String input){
         Properties props = new Properties();
-        props.setProperty("annotators", "tokenize, ssplit, pos, lemma, ner");
+        props.setProperty("annotators", "tokenize, ssplit, pos, lemma, ner,parse,dcoref");
         props.put("threads","4");
         StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
         Annotation document = new Annotation(input);

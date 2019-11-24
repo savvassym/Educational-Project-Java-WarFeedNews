@@ -110,4 +110,13 @@ public class TweetServiceImplTest{
         Assert.assertEquals(response>0, response>0);
         SpringApplication.exit(context, () -> 0);
     }
+
+    @Test
+    public void sortByTimestamp() {
+        ApplicationContext context = SpringApplication.run(WnfApplication.class);
+        TweetService service = context.getBean(TweetService.class);
+        List<Tweet> response = service.sortByTimestamp();
+        Assert.assertTrue(response.size()>0);
+        SpringApplication.exit(context,()->0);
+    }
 }

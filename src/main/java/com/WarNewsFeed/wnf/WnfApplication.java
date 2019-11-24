@@ -65,7 +65,6 @@ public class WnfApplication {
             System.out.println(tw.toString());
         }
 
-        tweetService.sortByTimestamp();
 	}
 
 }

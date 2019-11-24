@@ -95,6 +95,8 @@ public class TweetDaoImpl extends JdbcDaoSupport implements TweetDao {
                 return tweet;
             }
         });
+
+
     }
 
     @Override
@@ -133,5 +135,10 @@ public class TweetDaoImpl extends JdbcDaoSupport implements TweetDao {
             result.add(tweet);
         }
         return result;
+    }
+
+    @Override
+    public List<Tweet> sortByTimestamp(){
+
     }
 }

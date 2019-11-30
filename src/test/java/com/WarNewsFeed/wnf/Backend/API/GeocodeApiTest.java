@@ -38,4 +38,13 @@ public class GeocodeApiTest {
         }
         assertEquals(list, expectedOutput);
     }
+
+    @Test
+    public void testGetCoordinatesReturnsNoResults() {
+        String list;
+        String expectedOutput = null;
+        GeocodeApi geocodeApi = new GeocodeApi();
+        list=geocodeApi.getCoordinates("Gaersgs");
+        assertEquals(list,expectedOutput);
+    }
 }

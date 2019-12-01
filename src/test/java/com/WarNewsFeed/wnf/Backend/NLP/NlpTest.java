@@ -27,7 +27,9 @@ public class NlpTest {
         Map<String,String> expected = new HashMap<>();
         Nlp nlp = new Nlp();
         actual = nlp.analyzer("");
+
         assertEquals(expected,actual);
+
     }
 
 

@@ -9,7 +9,11 @@ public class Tokenizer {
 
 
     public String tokenize(String input) {
-        return Arrays.toString(input.split("-|,|\\s"));
+        if(input!=null) {
+            return Arrays.toString(input.split("-|,|\\s"));
+        }
+        else {
+            return "Null String not allowed";
+        }
     }
 }
-

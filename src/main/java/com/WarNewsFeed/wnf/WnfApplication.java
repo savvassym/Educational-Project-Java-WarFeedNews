@@ -59,7 +59,8 @@ public class WnfApplication {
 
 
         for (String st : tokens){
-            collect.putAll(filter.analyzer(st));
+            collect = filter.analyzer(st);
+        //    collect.putAll(filter.analyzer(st));
         }
         collect.forEach((key,value)->System.out.println(key+" : "+ value));
         for(Map.Entry entry: collect.entrySet()){

@@ -30,6 +30,11 @@ public class TweetController {
         return tweetService.getTweetsByCountry(country);
     }
 
+    @GetMapping(value = "/conflicts/{country}")
+    public int numOfConflict(@PathVariable String country){
+        return tweetService.getConflictsByCountry(country);
+    }
+
 
 
 //

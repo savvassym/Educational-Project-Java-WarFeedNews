@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class TweetController {
@@ -16,20 +17,19 @@ public class TweetController {
     private TweetService tweetService;
 
     @GetMapping("/")
-    public String home(){
+    public String home() {
         return "hello";
     }
 
-    @GetMapping(value = "/tweets",produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Tweet> findAll(){
+    @GetMapping(value = "/tweets", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Tweet> findAll() {
         return tweetService.getAllTweets();
     }
 
     @GetMapping(value = "/tweets/{country}")
-    public List<Tweet> findByCountries(@PathVariable String country){
+    public List<Tweet> findByCountries(@PathVariable String country) {
         return tweetService.getTweetsByCountry(country);
     }
-
 
 
 //

@@ -146,7 +146,7 @@ public class TweetDaoImpl extends JdbcDaoSupport implements TweetDao {
 
     @Override
     public List<Tweet> sortByTimestamp(){
-        String sqlQuery = "SELECT * FROM TWEET ORDER BY TIME_STAMP ASC";
+        String sqlQuery = "SELECT * FROM TWEET ORDER BY TWEET.TIME_STAMP";
         assert getJdbcTemplate() != null;
         List<Map<String, Object>> rows = getJdbcTemplate().queryForList(sqlQuery);
         List<Tweet> result = new ArrayList<Tweet>();

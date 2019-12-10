@@ -20,6 +20,19 @@ public class NlpTest {
         assertEquals(haslist,expected);
     }
 
+
+    @Test
+    public void TestThatCanHandleEmptyString(){
+        Map<String,String> actual = new HashMap<>();
+        Map<String,String> expected = new HashMap<>();
+        Nlp nlp = new Nlp();
+        actual = nlp.analyzer("");
+
+        assertEquals(expected,actual);
+
+    }
+
+
     @Test
     public void testThatCountryIsRecognisedWhenMixedWithOtherWords(){
         Map<String, String> list;

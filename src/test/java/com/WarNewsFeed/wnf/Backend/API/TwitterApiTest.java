@@ -30,5 +30,5 @@ public class TwitterApiTest {
                 new RuntimeException("Something went wrong"));
         list.get(0);
     }
-    
+
     }

@@ -1,4 +1,4 @@
-package com.WarNewsFeed.wnf.Backend.NLP;
+package com.WarNewsFeed.wnf.backend.nlp;
 
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreLabel;
@@ -12,15 +12,11 @@ import java.util.*;
 @Service
 public class Nlp {
 
-    private Map<String,String> collect = new TreeMap<>();
-
+    private Map<String,String> collect = new HashMap<>();
+    private StanfordCoreNLP pip = propInit();
     public Map<String,String> analyzer(String input){
-        Properties props = new Properties();
-        props.setProperty("annotators", "tokenize, ssplit, pos, lemma, ner,parse,dcoref");
-        props.put("threads","4");
-        StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
         Annotation document = new Annotation(input);
-        pipeline.annotate(document);
+        pip.annotate(document);
         List<CoreMap> sentences = document.get(CoreAnnotations.SentencesAnnotation.class);
         for(CoreMap sentence : sentences){
             for(CoreLabel tokens : sentence.get(CoreAnnotations.TokensAnnotation.class)){
@@ -29,6 +25,12 @@ public class Nlp {
             }
         }
         return collect;
+    }
+
+    private static StanfordCoreNLP propInit(){
+        Properties props = new Properties();
+        props.setProperty("annotators", "tokenize, ssplit, pos, lemma, ner,parse");
+        return new StanfordCoreNLP(props);
     }
 
 }

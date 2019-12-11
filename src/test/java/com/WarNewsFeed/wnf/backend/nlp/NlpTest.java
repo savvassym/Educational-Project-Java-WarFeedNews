@@ -1,4 +1,4 @@
-package com.WarNewsFeed.wnf.Backend.NLP;
+package com.WarNewsFeed.wnf.backend.nlp;
 
 import org.junit.Test;
 

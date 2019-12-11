@@ -1,4 +1,4 @@
-package com.WarNewsFeed.wnf.Backend.model;
+package com.WarNewsFeed.wnf.backend.model;
 
 import java.sql.Timestamp;
 

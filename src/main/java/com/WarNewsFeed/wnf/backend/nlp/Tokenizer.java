@@ -1,4 +1,4 @@
-package com.WarNewsFeed.wnf.Backend.NLP;
+package com.WarNewsFeed.wnf.backend.nlp;
 
 import org.springframework.stereotype.Service;
 
@@ -9,11 +9,6 @@ public class Tokenizer {
 
 
     public String tokenize(String input) {
-        if(input!=null) {
             return Arrays.toString(input.split("-|,|\\s"));
-        }
-        else {
-            return "Null String not allowed";
-        }
     }
 }

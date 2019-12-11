@@ -1,4 +1,4 @@
-package com.WarNewsFeed.wnf.Backend.NLP;
+package com.WarNewsFeed.wnf.backend.nlp;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -24,14 +24,5 @@ public class TokenizerTest {
         String expected = Arrays.toString(new String[]{""});
         Assert.assertEquals(expected,actual);
     }
-
-    @Test
-    public void TestThatTokenizerCanHandleNullInput() {
-        Tokenizer tokenizer = new Tokenizer();
-        String actual = tokenizer.tokenize(null);
-        String expected = "Null String not allowed";
-        Assert.assertEquals(expected,actual);
-    }
-
 
 }

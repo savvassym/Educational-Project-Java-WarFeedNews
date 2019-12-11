@@ -1,65 +1,75 @@
-package com.WarNewsFeed.wnf.Backend.Controller;
+package com.WarNewsFeed.wnf.backend.controller;
 
-import com.WarNewsFeed.wnf.Backend.model.Tweet;
-import com.WarNewsFeed.wnf.Backend.service.TweetService;
 import com.WarNewsFeed.wnf.WnfApplication;
+import com.WarNewsFeed.wnf.backend.model.Tweet;
+import com.WarNewsFeed.wnf.backend.service.TweetService;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public class TweetControllerTest {
-    @Autowired
-    TweetService service;
 
+
+    TweetService service;
+    private ApplicationContext context;
+
+    @Before
+    public void setUp()
+    {
+        context = SpringApplication.run(WnfApplication.class);
+        service = context.getBean(TweetService.class);
+    }
     @Test
     public void TestThatRestWillReturnANonEmptyList(){
-        ApplicationContext context = SpringApplication.run(WnfApplication.class);
-        TweetService service = context.getBean(TweetService.class);
+        Tweet tweet = new Tweet("1","Greece", Timestamp.valueOf("2019-11-21 14:41:20.55"),"12334");
+        Tweet tweet1 = new Tweet("2","Germany", Timestamp.valueOf("2019-10-21 14:41:20.55"),"69583");
         List<Tweet> tweets = service.getAllTweets();
         Assert.assertTrue("Tweets size is: "+tweets.size(),tweets.size()>0);
-        SpringApplication.exit(context, () -> 0);
     }
 
     @Test
     public void TestThatRestWillReturnANonEmptyListWhenFindTweetsByGivenCountry(){
-        ApplicationContext context = SpringApplication.run(WnfApplication.class);
-        TweetService service = context.getBean(TweetService.class);
-        List<Tweet> tweets = service.getTweetsByCountry("Greece");
+        Tweet tweet = new Tweet("3","Iran", Timestamp.valueOf("2019-09-21 14:41:20.55"),"9832878");
+        service.insertTweet(tweet);
+        String string = "Iran";
+        List<Tweet> tweets = service.getTweetsByCountry(string.toLowerCase());
         Assert.assertTrue("Tweets size is: "+tweets.size(),tweets.size()>0);
-        SpringApplication.exit(context, () -> 0);
     }
+
     @Test
-    public void getConflictsByCountry(){
-        ApplicationContext context = SpringApplication.run(WnfApplication.class);
-        TweetService service = context.getBean(TweetService.class);
-        String  country = "Dutch";
+    public void TestThatRestWillReturnHowManyTimesTheGivenCountryFound(){
+        Tweet tweet = new Tweet("4","Greece", Timestamp.valueOf("2019-11-21 14:41:20.55"),"3283812");
+        service.insertTweet(tweet);
+        String  country = "Greece";
         int numOfConflicts = service.getConflictsByCountry(country.toLowerCase());
         Assert.assertTrue(numOfConflicts>0);
-        SpringApplication.exit(context, () -> 0);
     }
 
     @Test
     public void TestThatGetConflictsByCountryWillReturn0whenInputIsEmpty(){
-        ApplicationContext context = SpringApplication.run(WnfApplication.class);
-        TweetService service = context.getBean(TweetService.class);
         String  country = "";
         int numOfConflicts = service.getConflictsByCountry(country.toLowerCase());
         Assert.assertEquals(0, numOfConflicts);
-        SpringApplication.exit(context, ()->0);
     }
 
     @Test
     public void TestThatGetConflictByCountryWillReturn0whenInputIsRandomPressedKeys(){
-        ApplicationContext context = SpringApplication.run(WnfApplication.class);
-        TweetService service = context.getBean(TweetService.class);
         String  country ="3jjfsdu89030423nj";
         int numOfConflicts = service.getConflictsByCountry(country.toLowerCase());
         Assert.assertEquals(0, numOfConflicts);
+    }
+
+    @After
+    public void tearDown()
+    {
         SpringApplication.exit(context, ()->0);
+
     }
 
 }

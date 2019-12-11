@@ -1,7 +1,7 @@
-package com.WarNewsFeed.wnf.Backend.Dao.impl;
+package com.WarNewsFeed.wnf.backend.dao.impl;
 
-import com.WarNewsFeed.wnf.Backend.Dao.TweetDao;
-import com.WarNewsFeed.wnf.Backend.model.Tweet;
+import com.WarNewsFeed.wnf.backend.dao.TweetDao;
+import com.WarNewsFeed.wnf.backend.model.Tweet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
@@ -34,7 +34,7 @@ public class TweetDaoImpl extends JdbcDaoSupport implements TweetDao {
     public int insertTweet(Tweet tweet) {
         String sql = "INSERT INTO TWEET "+"(TID, COUNTRY, TIME_STAMP, COORDINATES) VALUES (?, ?, ?, ?);";
         assert getJdbcTemplate() != null;
-        int res = getJdbcTemplate().update(sql, tweet.getTid(), tweet.getCountry(), tweet.getTime_stamp(), tweet.getCoordinates());
+        int res = getJdbcTemplate().update(sql, tweet.getTid(), tweet.getCountry().toLowerCase(), tweet.getTime_stamp(), tweet.getCoordinates());
         return res;
     }
 
@@ -47,7 +47,7 @@ public class TweetDaoImpl extends JdbcDaoSupport implements TweetDao {
             public void setValues(PreparedStatement preparedStatement, int i) throws SQLException {
                 Tweet tweet = tweets.get(i);
                 preparedStatement.setString(1, tweet.getTid());
-                preparedStatement.setString(2, tweet.getCountry());
+                preparedStatement.setString(2, tweet.getCountry().toLowerCase());
                 preparedStatement.setTimestamp(3, tweet.getTime_stamp());
                 preparedStatement.setString(4, tweet.getCoordinates());
             }

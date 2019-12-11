@@ -1,8 +1,8 @@
-package com.WarNewsFeed.wnf.Backend.service.impl;
+package com.WarNewsFeed.wnf.backend.service.impl;
 
-import com.WarNewsFeed.wnf.Backend.Dao.TweetDao;
-import com.WarNewsFeed.wnf.Backend.model.Tweet;
-import com.WarNewsFeed.wnf.Backend.service.TweetService;
+import com.WarNewsFeed.wnf.backend.dao.TweetDao;
+import com.WarNewsFeed.wnf.backend.model.Tweet;
+import com.WarNewsFeed.wnf.backend.service.TweetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

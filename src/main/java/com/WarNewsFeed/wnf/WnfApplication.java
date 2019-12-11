@@ -1,12 +1,12 @@
 package com.WarNewsFeed.wnf;
 
-import com.WarNewsFeed.wnf.Backend.API.GeocodeApi;
-import com.WarNewsFeed.wnf.Backend.API.TwitterApi;
-import com.WarNewsFeed.wnf.Backend.NLP.Nlp;
-import com.WarNewsFeed.wnf.Backend.NLP.Tokenizer;
-import com.WarNewsFeed.wnf.Backend.model.Tweet;
-import com.WarNewsFeed.wnf.Backend.service.TweetService;
-import com.WarNewsFeed.wnf.Backend.service.TwitterApiService;
+import com.WarNewsFeed.wnf.backend.api.GeocodeApi;
+import com.WarNewsFeed.wnf.backend.api.TwitterApi;
+import com.WarNewsFeed.wnf.backend.model.Tweet;
+import com.WarNewsFeed.wnf.backend.nlp.Nlp;
+import com.WarNewsFeed.wnf.backend.nlp.Tokenizer;
+import com.WarNewsFeed.wnf.backend.service.TweetService;
+import com.WarNewsFeed.wnf.backend.service.TwitterApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,10 +15,7 @@ import twitter4j.TwitterException;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 @SpringBootApplication
 public class WnfApplication {
@@ -29,7 +26,6 @@ public class WnfApplication {
 	@Autowired
 	Tokenizer tokenizer;
 
-
 	public static void main(String[] args) throws TwitterException{
 		ApplicationContext context = SpringApplication.run(WnfApplication.class, args);
 		TweetService tweetService = context.getBean(TweetService.class);
@@ -37,10 +33,9 @@ public class WnfApplication {
         Tokenizer tokenizer = context.getBean(Tokenizer.class);
 
 
-
         GeocodeApi geocodeApi = new GeocodeApi();
 		String coordinates;
-        Map<String,String> collect = new TreeMap<>();
+        Map<String,String> collection = new HashMap<>();
 
 		TwitterApi twitterApi = new TwitterApi();
         TwitterApiService twitterApiService = new TwitterApiService(twitterApi);
@@ -58,13 +53,19 @@ public class WnfApplication {
         }
 
 
+        System.out.println("Run with only one annotation");
+        long startTime = System.currentTimeMillis();
+
         for (String st : tokens){
-            collect = filter.analyzer(st);
-        //    collect.putAll(filter.analyzer(st));
+            collection.putAll(filter.analyzer(st));
+            System.out.println("analyze tweets...please wait...");
         }
-        collect.forEach((key,value)->System.out.println(key+" : "+ value));
-        for(Map.Entry entry: collect.entrySet()){
-		    if("COUNTRY".equals(entry.getValue()) || "NATIONALITY".equals(entry.getValue())){
+
+
+
+        collection.forEach((key,value)->System.out.println(key+" : "+ value));
+        for(Map.Entry entry: collection.entrySet()){
+		    if("COUNTRY".equals(entry.getValue())){
 		        countries.add((String) entry.getKey());
             }
         }
@@ -83,6 +84,12 @@ public class WnfApplication {
             System.out.println(tw.toString());
         }
 
-	}
+        //stop time
+        long stopTime = System.currentTimeMillis();
+        double toSec = (stopTime-startTime) / 1000.0;
+        System.out.println(Math.round(toSec));
+
+
+    }
 
 }

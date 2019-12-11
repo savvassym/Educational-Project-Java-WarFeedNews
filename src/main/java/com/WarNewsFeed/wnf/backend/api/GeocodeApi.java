@@ -1,4 +1,4 @@
-package com.WarNewsFeed.wnf.Backend.API;
+package com.WarNewsFeed.wnf.backend.api;
 
 import com.byteowls.jopencage.JOpenCageGeocoder;
 import com.byteowls.jopencage.model.JOpenCageForwardRequest;

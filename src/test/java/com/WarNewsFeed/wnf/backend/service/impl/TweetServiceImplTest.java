@@ -1,28 +1,36 @@
-package com.WarNewsFeed.wnf.Backend.service.impl;
+package com.WarNewsFeed.wnf.backend.service.impl;
 
-import com.WarNewsFeed.wnf.Backend.model.Tweet;
-import com.WarNewsFeed.wnf.Backend.service.TweetService;
 import com.WarNewsFeed.wnf.WnfApplication;
+import com.WarNewsFeed.wnf.backend.model.Tweet;
+import com.WarNewsFeed.wnf.backend.service.TweetService;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.runner.RunWith;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-
-
+@RunWith(SpringJUnit4ClassRunner.class)
 public class TweetServiceImplTest{
-    @Autowired
+   // @Autowired
     TweetService service;
+    private ApplicationContext context;
+
+    @Before
+    public void setUp()
+    {
+        context = SpringApplication.run(WnfApplication.class);
+        service = context.getBean(TweetService.class);
+    }
 
 
     @Test
     public void TestThatICanInsertTweetOnDB(){
-        ApplicationContext context = SpringApplication.run(WnfApplication.class);
-        TweetService service = context.getBean(TweetService.class);
         Tweet tweet = new Tweet();
         tweet.setTid("2");
         tweet.setCountry("Germany");
@@ -31,13 +39,11 @@ public class TweetServiceImplTest{
         int actual = service.insertTweet(tweet);
         int expected =1;
         Assert.assertEquals(expected,actual);
-        SpringApplication.exit(context, () -> 0);
     }
+
 
     @Test
     public void TestThatICanInsertListOfTweetsOnDB() {
-        ApplicationContext context = SpringApplication.run(WnfApplication.class);
-        TweetService service = context.getBean(TweetService.class);
         Tweet tweet = new Tweet();
         tweet.setTid("3");
         tweet.setCountry("TestCountry3");
@@ -54,60 +60,63 @@ public class TweetServiceImplTest{
         int[] actual = service.insertTweets(list);
         int[] expected = {1,1};
         Assert.assertArrayEquals(expected,actual);
-        SpringApplication.exit(context, () -> 0);
     }
 
     @Test
     public void TestThatDatabaseResponseToGetAllTweetsQuery() {
-        ApplicationContext context = SpringApplication.run(WnfApplication.class);
-        TweetService service = context.getBean(TweetService.class);
+        Tweet tweet = new Tweet("1","Greece",Timestamp.valueOf("2019-11-21 14:41:20.55"),"3283812");
+        service.insertTweet(tweet);
         List<Tweet> actual = service.getAllTweets();
         Assert.assertTrue(actual.size()>0);
-        SpringApplication.exit(context,()->0);
     }
 
     @Test
     public void TestThatDatabaseResponseToGetTweetByID() {
-        ApplicationContext context = SpringApplication.run(WnfApplication.class);
-        TweetService service = context.getBean(TweetService.class);
-        Tweet response = service.getTweetById("3");
+        Tweet tweet = new Tweet("5","France",Timestamp.valueOf("2017-11-21 14:41:20.55"),"2131231");
+        service.insertTweet(tweet);
+        Tweet response = service.getTweetById("5");
         Assert.assertNotNull(response);
-        SpringApplication.exit(context,()->0);
     }
 
     @Test
     public void TestThatDatabaseResponseToGetTweetsByCountry() {
-        ApplicationContext context = SpringApplication.run(WnfApplication.class);
-        TweetService service = context.getBean(TweetService.class);
-        List<Tweet> response = service.getTweetsByCountry("Germany");
+        Tweet tweet = new Tweet("6","Germany",Timestamp.valueOf("2019-11-21 14:41:20.55"),"3283812");
+        service.insertTweet(tweet);
+        String input = "Germany";
+        List<Tweet> response = service.getTweetsByCountry(input.toLowerCase());
         Assert.assertTrue(response.size()>0);
-        SpringApplication.exit(context,()->0);
     }
 
     @Test
-    public void TestThatDbResponseToQueryfindConfilcsByTimestamp() {
-        ApplicationContext context = SpringApplication.run(WnfApplication.class);
-        TweetService service = context.getBean(TweetService.class);
-        int response = service.findConflictsByTime("Germany", Timestamp.valueOf("2019-11-21 14:19:10.554"), Timestamp.valueOf("2019-11-25 22:42:48.000000000"));
+    public void TestThatDbResponseToQueryFindConflictsByTimestamp() {
+        Tweet tweet = new Tweet("10","Germany",Timestamp.valueOf("2019-11-21 14:19:10.554"),"129843");
+        service.insertTweet(tweet);
+        String string ="germany";
+        int response = service.findConflictsByTime(string.toLowerCase(), Timestamp.valueOf("2019-11-21 14:19:10.554"), Timestamp.valueOf("2019-11-25 22:42:48.000000000"));
         Assert.assertTrue(response>0);
-        SpringApplication.exit(context, () -> 0);
     }
 
     @Test
     public void sortByCountry() {
-        ApplicationContext context = SpringApplication.run(WnfApplication.class);
-        TweetService service = context.getBean(TweetService.class);
+        Tweet tweet = new Tweet("7","Germany",Timestamp.valueOf("2019-11-21 14:41:20.55"),"3283812");
+        Tweet tweet1 = new Tweet("8","France",Timestamp.valueOf("2017-11-21 14:41:20.55"),"2131231");
+        service.insertTweets(List.of(tweet,tweet));
         List<Tweet> response = service.sortByCountry();
         Assert.assertTrue(response.size()>0);
-        SpringApplication.exit(context,()->0);
     }
 
     @Test
     public void getConflictsByCountryTest() {
-        ApplicationContext context = SpringApplication.run(WnfApplication.class);
-        TweetService service = context.getBean(TweetService.class);
-        int response = service.getConflictsByCountry("greece");
+        Tweet tweet = new Tweet("9","Greece",Timestamp.valueOf("2019-11-21 14:41:20.55"),"3283812");
+        service.insertTweet(tweet);
+        String inp = "greece";
+        int response = service.getConflictsByCountry(inp.toLowerCase());
         Assert.assertEquals(response>0, response>0);
+    }
+
+    @After
+    public void tearDown()
+    {
         SpringApplication.exit(context, () -> 0);
     }
 }

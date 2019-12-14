@@ -84,6 +84,11 @@ public class WnfApplication {
             System.out.println(tw.toString());
         }
 
+        List<Tweet> count = tweetService.showCountOfEveryCountry();
+        for(Tweet tw : count){
+            System.out.println(tw.toString());
+        }
+
         //stop time
         long stopTime = System.currentTimeMillis();
         double toSec = (stopTime-startTime) / 1000.0;

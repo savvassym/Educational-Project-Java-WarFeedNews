@@ -141,4 +141,19 @@ public class TweetDaoImpl extends JdbcDaoSupport implements TweetDao {
         }
         return result;
     }
+
+    @Override
+    public List<Tweet> showCountOfEveryCountry(){
+        String sql = "SELECT TWEET.COUNTRY, COUNT(TWEET.TID) AS TID FROM TWEET GROUP BY COUNTRY" ;
+        assert getJdbcTemplate() != null;
+        List <Map<String,Object>> rows = getJdbcTemplate().queryForList(sql);
+        List<Tweet> result = new ArrayList<Tweet>();
+        for(Map<String, Object> row : rows){
+            Tweet tweet = new Tweet();
+            tweet.setCountry((String) row.get("country"));
+            tweet.setTid((String) row.get("tid"));
+            result.add(tweet);
+        }
+        return result;
+    }
 }

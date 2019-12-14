@@ -15,8 +15,4 @@ public interface TweetService {
     int getConflictsByCountry(String country);
     List<Tweet> sortByCountry();
     List<Tweet> sortByTimestamp();
-
-
-
-    
 }

@@ -1,5 +1,6 @@
-package com.WarNewsFeed.wnf.Backend.API;
+package com.WarNewsFeed.wnf.backend.API;
 
+import com.WarNewsFeed.wnf.backend.api.GeocodeApi;
 import org.junit.Test;
 
 import java.util.ArrayList;

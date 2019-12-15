@@ -1,5 +1,6 @@
 package com.WarNewsFeed.wnf.Backend.API;
 
+import com.WarNewsFeed.wnf.backend.api.TwitterApi;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;

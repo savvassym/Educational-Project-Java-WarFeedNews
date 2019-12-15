@@ -1,65 +1,40 @@
 package com.WarNewsFeed.wnf.backend.nlp;
 
+import com.WarNewsFeed.wnf.helpers.Tuple;
+import org.junit.Assert;
 import org.junit.Test;
+import org.junit.internal.runners.JUnit4ClassRunner;
+import org.junit.runner.RunWith;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-
+@RunWith(JUnit4ClassRunner.class)
 public class NlpTest {
 
     @Test
     public void testThatGreeceIsRecognisedAsACountryAndAthensAsACity() {
-        Map<String, String> haslist;
-        Map<String, String> expected = new HashMap<>();
+        List<Tuple<String,String>> actual;
         Nlp nlp = new Nlp();
-        haslist = nlp.analyzer("Greece Athens");
-        expected.put("Greece","COUNTRY");
-        expected.put("Athens","CITY");
-        assertEquals(haslist,expected);
+        actual = nlp.analyzer("Greece Athens");
+        Tuple<String,String> tp = new Tuple<>("Greece","COUNTRY");
+        Tuple<String,String> tp2 = new Tuple<>("Athens","CITY");
+        List<Tuple<String,String>> expected = new ArrayList<>();
+        expected.add(tp);
+        expected.add(tp2);
+        Assert.assertEquals(expected,actual);
     }
 
 
     @Test
     public void TestThatCanHandleEmptyString(){
-        Map<String,String> actual = new HashMap<>();
-        Map<String,String> expected = new HashMap<>();
+        List<Tuple<String,String>> actual;
         Nlp nlp = new Nlp();
+        Tuple<String,String> tp = new Tuple<>("","");
         actual = nlp.analyzer("");
-
-        assertEquals(expected,actual);
-
+        List<Tuple<String,String>> expected = new ArrayList<>();
+        expected.add(tp);
+        Assert.assertEquals(expected,actual);
     }
 
-
-    @Test
-    public void testThatCountryIsRecognisedWhenMixedWithOtherWords(){
-        Map<String, String> list;
-        Map<String, String> expected = new HashMap<>();
-        Nlp nlp = new Nlp();
-        list = nlp.analyzer("It takes a lifetime for someone to discover Greece, but it only takes an instance to fall in love with her.");
-        expected.put("but","O");
-        expected.put("love","O");
-        expected.put("a","O");
-        expected.put("discover","O");
-        expected.put("instance","O");
-        expected.put("in","O");
-        expected.put("lifetime","O");
-        expected.put("for","O");
-        expected.put("It","O");
-        expected.put("it","O");
-        expected.put(",","O");
-        expected.put("an","O");
-        expected.put(".","O");
-        expected.put("Greece","COUNTRY");
-        expected.put("with","O");
-        expected.put("someone","O");
-        expected.put("fall","O");
-        expected.put("her","O");
-        expected.put("only","O");
-        expected.put("to","O");
-        expected.put("takes","O");
-        assertEquals(list,expected);
-    }
 }

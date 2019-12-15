@@ -4,6 +4,7 @@ import com.WarNewsFeed.wnf.backend.model.Tweet;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 public interface TweetDao {
     int insertTweet(Tweet tweet);
@@ -14,5 +15,5 @@ public interface TweetDao {
     int getConflictsByCountry(String country);
     int  findConflictsByTime(String country, Timestamp timeUp, Timestamp timeTo);
     List<Tweet> sortByCountry();
-    List<Tweet> showCountOfEveryCountry();
+    Map<String, Object> showCountOfEveryCountry();
 }

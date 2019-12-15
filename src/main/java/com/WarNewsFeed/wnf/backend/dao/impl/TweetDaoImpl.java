@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -143,16 +144,18 @@ public class TweetDaoImpl extends JdbcDaoSupport implements TweetDao {
     }
 
     @Override
-    public List<Tweet> showCountOfEveryCountry(){
-        String sql = "SELECT TWEET.COUNTRY, COUNT(TWEET.TID) AS TID FROM TWEET GROUP BY COUNTRY" ;
+    public Map<String, Object> showCountOfEveryCountry(){
+        String sql = "SELECT UPPER(TWEET.COUNTRY) AS COUNTRY, COUNT(*) AS CONFLICTS FROM TWEET GROUP BY UPPER(COUNTRY)" ;
         assert getJdbcTemplate() != null;
         List <Map<String,Object>> rows = getJdbcTemplate().queryForList(sql);
-        List<Tweet> result = new ArrayList<Tweet>();
+        Map<String,Object> result = new HashMap<String, Object>();
+        //List<Tweet> result = new ArrayList<Map>();
         for(Map<String, Object> row : rows){
-            Tweet tweet = new Tweet();
-            tweet.setCountry((String) row.get("country"));
-            tweet.setTid((String) row.get("tid"));
-            result.add(tweet);
+//            Tweet tweet = new Tweet();
+//            tweet.setCountry((String) row.get("country"));
+//            tweet.setTid((String) row.get("conflicts"));
+            result.put();
+            result.add(result);
         }
         return result;
     }

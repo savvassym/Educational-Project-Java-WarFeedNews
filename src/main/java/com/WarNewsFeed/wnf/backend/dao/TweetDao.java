@@ -1,10 +1,10 @@
 package com.WarNewsFeed.wnf.backend.dao;
 
 import com.WarNewsFeed.wnf.backend.model.Tweet;
+import com.WarNewsFeed.wnf.helpers.Tuple;
 
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.Map;
 
 public interface TweetDao {
     int insertTweet(Tweet tweet);
@@ -15,5 +15,5 @@ public interface TweetDao {
     int getConflictsByCountry(String country);
     int  findConflictsByTime(String country, Timestamp timeUp, Timestamp timeTo);
     List<Tweet> sortByCountry();
-    Map<String, Object> showCountOfEveryCountry();
+    List<Tuple<String,String>> showCountOfEveryCountry();
 }

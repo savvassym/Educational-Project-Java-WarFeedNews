@@ -75,6 +75,11 @@ public class WnfApplication {
             System.out.println(tw.toString());
         }
 
+        List<Tuple<String, String>> count = tweetService.showCountOfEveryCountry();
+        for (Tuple<String, String> tuple : count){
+            System.out.println(tuple.toString());
+        }
+
 
 
     }

@@ -1,6 +1,7 @@
 package com.WarNewsFeed.wnf.backend.service;
 
 import com.WarNewsFeed.wnf.backend.model.Tweet;
+import com.WarNewsFeed.wnf.helpers.Tuple;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -14,5 +15,5 @@ public interface TweetService {
     int  findConflictsByTime(String country, Timestamp timeUp, Timestamp timeTo);
     int getConflictsByCountry(String country);
     List<Tweet> sortByCountry();
-    List<Tweet> showCountOfEveryCountry();
+    List<Tuple<String,String>> showCountOfEveryCountry();
 }

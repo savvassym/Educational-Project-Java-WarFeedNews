@@ -30,7 +30,8 @@ public class Nlp {
             List<CoreMap> sentences = document.get(CoreAnnotations.SentencesAnnotation.class);
             for (CoreMap sentence : sentences) {
                 for (CoreLabel tokens : sentence.get(CoreAnnotations.TokensAnnotation.class)) {
-                    Tuple<String, String> tuple = new Tuple<>(tokens.getString(CoreAnnotations.TextAnnotation.class), tokens.get(CoreAnnotations.NamedEntityTagAnnotation.class));
+                    Tuple<String, String> tuple = new Tuple<>(tokens.getString(CoreAnnotations.TextAnnotation.class),
+                            tokens.get(CoreAnnotations.NamedEntityTagAnnotation.class));
                     collect.add(tuple);
                 }
             }

@@ -143,6 +143,8 @@ public class TweetDaoImpl extends JdbcDaoSupport implements TweetDao {
         return result;
     }
 
+    private List<Tuple<String,String>> result = new ArrayList<>();
+
     @Override
     public List<Tuple<String,String>> showCountOfEveryCountry(){
         String sql = "SELECT TWEET.COUNTRY, COUNT(*) AS CONFLICTS FROM TWEET GROUP BY COUNTRY" ;
@@ -157,5 +159,5 @@ public class TweetDaoImpl extends JdbcDaoSupport implements TweetDao {
         return result;
     }
 
-    private List<Tuple<String,String>> result = new ArrayList<>();
+
 }

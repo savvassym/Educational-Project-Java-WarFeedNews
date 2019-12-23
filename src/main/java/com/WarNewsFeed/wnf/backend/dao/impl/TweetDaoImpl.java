@@ -2,6 +2,7 @@ package com.WarNewsFeed.wnf.backend.dao.impl;
 
 import com.WarNewsFeed.wnf.backend.dao.TweetDao;
 import com.WarNewsFeed.wnf.backend.model.Tweet;
+import com.WarNewsFeed.wnf.helpers.Tuple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
@@ -141,4 +142,22 @@ public class TweetDaoImpl extends JdbcDaoSupport implements TweetDao {
         }
         return result;
     }
+
+    private List<Tuple<String,String>> result = new ArrayList<>();
+
+    @Override
+    public List<Tuple<String,String>> showCountOfEveryCountry(){
+        String sql = "SELECT TWEET.COUNTRY, COUNT(*) AS CONFLICTS FROM TWEET GROUP BY COUNTRY" ;
+        assert getJdbcTemplate() != null;
+
+        List <Map<String,Object>> queryRow = getJdbcTemplate().queryForList(sql);
+        for(Map<String,Object> row : queryRow){
+            Tuple tuple = new Tuple<>(row.get("country"),(row.get("conflicts")));
+            result.add(tuple);
+        }
+
+        return result;
+    }
+
+
 }

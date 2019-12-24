@@ -2,7 +2,6 @@ package com.WarNewsFeed.wnf.backend.controller;
 
 import com.WarNewsFeed.wnf.backend.model.Tweet;
 import com.WarNewsFeed.wnf.backend.service.TweetService;
-import com.WarNewsFeed.wnf.helpers.Tuple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -38,8 +38,8 @@ public class TweetController {
         return tweetService.getConflictsByCountry(country);
     }
 
-    @GetMapping(value = "/showCountOfEveryCountry")
-    public List<Tuple<String,String>> showCountForCountries(){
+    @GetMapping(value = "/showCountOfEveryCountry", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Map<Object, Object> showCountForCountries(){
         return tweetService.showCountOfEveryCountry();
     }
 

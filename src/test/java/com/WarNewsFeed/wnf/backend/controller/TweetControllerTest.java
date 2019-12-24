@@ -11,7 +11,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TweetControllerTest {
 
@@ -64,6 +66,14 @@ public class TweetControllerTest {
         int numOfConflicts = service.getConflictsByCountry(country.toLowerCase());
         Assert.assertEquals(0, numOfConflicts);
     }
+
+    @Test
+    public void TestThatShowCountForCountriesWillReturnTheCountOfEveryCountry(){
+        Map<Object,Object> res = new HashMap<>();
+        res = service.showCountOfEveryCountry();
+        Assert.assertTrue(res.size()>0);
+    }
+
 
     @After
     public void tearDown()

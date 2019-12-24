@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -37,6 +38,10 @@ public class TweetController {
         return tweetService.getConflictsByCountry(country);
     }
 
+    @GetMapping(value = "/showCountOfEveryCountry", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Map<Object, Object> showCountForCountries(){
+        return tweetService.showCountOfEveryCountry();
+    }
 
 //
 //    @PostMapping("/tweet/in")

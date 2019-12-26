@@ -13,6 +13,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TweetServiceImplTest{
    // @Autowired
@@ -117,7 +119,7 @@ public class TweetServiceImplTest{
         Tweet tweet = new Tweet("10","Lithuania",Timestamp.valueOf("2019-12-22 16:16:24.54"),"38.9597594  34.9249653");
         Tweet tweet1 = new Tweet("11","Iraq",Timestamp.valueOf("2019-12-22 16:16:24.54"),"33.0955793  44.1749775");
         service.insertTweets(List.of(tweet,tweet1));
-        List<Tuple<String,String>> result = service.showCountOfEveryCountry();
+        Map<Object,Object> result = service.showCountOfEveryCountry();
         Assert.assertTrue(result.size()>0);
     }
 

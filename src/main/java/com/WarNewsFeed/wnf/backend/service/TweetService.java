@@ -5,6 +5,7 @@ import com.WarNewsFeed.wnf.helpers.Tuple;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 public interface TweetService {
     int insertTweet(Tweet tweet);
@@ -15,5 +16,5 @@ public interface TweetService {
     int  findConflictsByTime(String country, Timestamp timeUp, Timestamp timeTo);
     int getConflictsByCountry(String country);
     List<Tweet> sortByCountry();
-    List<Tuple<String,String>> showCountOfEveryCountry();
+    Map<Object,Object> showCountOfEveryCountry();
 }

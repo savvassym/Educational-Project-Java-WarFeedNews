@@ -18,6 +18,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @SpringBootApplication
 public class WnfApplication {
@@ -75,9 +76,9 @@ public class WnfApplication {
             System.out.println(tw.toString());
         }
 
-        List<Tuple<String, String>> count = tweetService.showCountOfEveryCountry();
-        for (Tuple<String, String> tuple : count){
-            System.out.println(tuple.toString());
+       Map<Object,Object> count = tweetService.showCountOfEveryCountry();
+        for (Object row : count.keySet()) {
+            System.out.println( row +" , "+ count.get(row));
         }
 
 

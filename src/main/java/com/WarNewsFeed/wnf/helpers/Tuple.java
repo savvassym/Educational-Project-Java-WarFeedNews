@@ -28,9 +28,8 @@ public class Tuple<X,Y> {
 
     @Override
     public String toString() {
-        return "Tuple{" +
-                "val1=" + val1 +
-                ", val2=" + val2 +
-                '}';
+        return "val1=" + val1 +
+                " "+"val2=" +val2;
     }
+        
 }

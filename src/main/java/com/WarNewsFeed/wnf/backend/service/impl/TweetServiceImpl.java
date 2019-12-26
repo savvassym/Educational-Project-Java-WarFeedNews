@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class TweetServiceImpl implements TweetService {
@@ -64,8 +65,8 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
-    public List<Tuple<String,String>> showCountOfEveryCountry(){
-        List<Tuple<String, String>> result = tweetDao.showCountOfEveryCountry();
+    public Map<Object,Object> showCountOfEveryCountry(){
+        Map<Object,Object> result = tweetDao.showCountOfEveryCountry();
         return result;
     }
 

@@ -156,7 +156,7 @@ public class TweetServiceImplTest{
     public void getConflictsWithCoordinate() {
         Tweet tweet = new Tweet("15","Lithuania",Timestamp.valueOf("2019-12-22 16:16:24.54"),"38.9597594  34.9249653");
         Tweet tweet1 = new Tweet("16","Iraq",Timestamp.valueOf("2019-12-22 16:16:24.54"),"33.0955793  44.1749775");
-        service.insertTweets(List.of(tweet,tweet));
+        service.insertTweets(List.of(tweet,tweet1));
         List<Triplet> result = service.getConflictsWithCoordinate();
         Assert.assertTrue(result.size()>0);
     }

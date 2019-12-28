@@ -2,6 +2,7 @@ package com.WarNewsFeed.wnf.backend.service.impl;
 
 import com.WarNewsFeed.wnf.WnfApplication;
 import com.WarNewsFeed.wnf.backend.model.Tweet;
+import com.WarNewsFeed.wnf.backend.model.TweetText;
 import com.WarNewsFeed.wnf.backend.service.TweetService;
 import com.WarNewsFeed.wnf.helpers.Tuple;
 import org.junit.*;
@@ -12,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -124,9 +126,37 @@ public class TweetServiceImplTest{
     }
 
 
+    @Test
+    public void getAllTweetText() {
+        TweetText text = new TweetText("tweet text inserting.");
+        service.insertTweetText(text);
+        List<TweetText> tweetTextList = service.getAllTweetText();
+        Assert.assertTrue(tweetTextList.size()>0);
+    }
+
+    @Test
+    public void insertTweetText() {
+        TweetText text = new TweetText("Tweet text test insert.");
+        int expected = 1;
+        int actual = service.insertTweetText(text);
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void insertTweetsTexts() {
+        TweetText text1 = new TweetText("Tweet text insert test as list test1");
+        TweetText text2 = new TweetText("Tweet text insert test as list test2");
+        int[] expected = {1,1};
+        int[] actual = service.insertTweetsTexts(Arrays.asList(text1,text2));
+        Assert.assertArrayEquals(expected,actual);
+    }
+
+
+
     @After
     public void tearDown()
     {
         SpringApplication.exit(context, () -> 0);
     }
+
 }

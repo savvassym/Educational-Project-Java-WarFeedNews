@@ -2,6 +2,7 @@ package com.WarNewsFeed.wnf.backend.service.impl;
 
 import com.WarNewsFeed.wnf.backend.dao.TweetDao;
 import com.WarNewsFeed.wnf.backend.model.Tweet;
+import com.WarNewsFeed.wnf.backend.model.TweetText;
 import com.WarNewsFeed.wnf.backend.service.TweetService;
 import com.WarNewsFeed.wnf.helpers.Tuple;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +69,22 @@ public class TweetServiceImpl implements TweetService {
     public Map<Object,Object> showCountOfEveryCountry(){
         Map<Object,Object> result = tweetDao.showCountOfEveryCountry();
         return result;
+    }
+
+    @Override
+    public List<TweetText> getAllTweetText() {
+        List<TweetText> tweetTexts = tweetDao.getAllTweetText();
+        return tweetTexts;
+    }
+
+    @Override
+    public int insertTweetText(TweetText text) {
+        return  tweetDao.insertTweetText(text);
+    }
+
+    @Override
+    public int[] insertTweetsTexts(List<TweetText> tweetsTexts) {
+        return tweetDao.insertTweetsTexts(tweetsTexts);
     }
 
 }

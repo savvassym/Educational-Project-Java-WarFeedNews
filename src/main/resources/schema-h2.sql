@@ -6,3 +6,7 @@ CREATE TABLE tweet (
     time_stamp timestamp,
     coordinates varchar(100)
 );
+
+CREATE TABLE tweet_text(
+    tw_text text
+);

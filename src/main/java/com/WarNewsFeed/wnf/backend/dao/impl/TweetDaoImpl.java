@@ -2,6 +2,7 @@ package com.WarNewsFeed.wnf.backend.dao.impl;
 
 import com.WarNewsFeed.wnf.backend.dao.TweetDao;
 import com.WarNewsFeed.wnf.backend.model.Tweet;
+import com.WarNewsFeed.wnf.backend.model.TweetText;
 import com.WarNewsFeed.wnf.helpers.Tuple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
@@ -159,5 +160,44 @@ public class TweetDaoImpl extends JdbcDaoSupport implements TweetDao {
         return result;
     }
 
+    @Override
+    public List<TweetText> getAllTweetText() {
+        String sql = "SELECT * FROM TWEET_TEXT";
+        assert getJdbcTemplate() != null;
+        List<Map<String, Object>> rows = getJdbcTemplate().queryForList(sql);
+        List<TweetText> result = new ArrayList<TweetText>();
+        for(Map<String, Object> row : rows){
+            TweetText tweetText = new TweetText();
+            tweetText.setText((String) row.get("tw_text"));
+            result.add(tweetText);
+        }
+        return result;
+    }
 
+    @Override
+    public int insertTweetText(TweetText text) {
+        String sql = "INSERT INTO TWEET_TEXT "+"(TW_TEXT) VALUES (?);";
+        assert getJdbcTemplate() != null;
+        int res = getJdbcTemplate().update(sql, text.getText());
+        return res;
+    }
+
+    @Override
+    public int[] insertTweetsTexts(List<TweetText> tweetsTexts) {
+        String sql = "INSERT INTO TWEET_TEXT "+"(TW_TEXT) VALUES (?)";
+        assert getJdbcTemplate() != null;
+        int[] k = getJdbcTemplate().batchUpdate(sql, new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement preparedStatement, int i) throws SQLException {
+                TweetText text = tweetsTexts.get(i);
+                preparedStatement.setString(1, text.getText());
+            }
+
+            @Override
+            public int getBatchSize() {
+                return tweetsTexts.size();
+            }
+        });
+        return k;
+    }
 }

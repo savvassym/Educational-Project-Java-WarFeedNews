@@ -4,6 +4,7 @@ import com.WarNewsFeed.wnf.backend.dao.TweetDao;
 import com.WarNewsFeed.wnf.backend.model.Tweet;
 import com.WarNewsFeed.wnf.backend.model.TweetText;
 import com.WarNewsFeed.wnf.backend.service.TweetService;
+import com.WarNewsFeed.wnf.helpers.Triplet;
 import com.WarNewsFeed.wnf.helpers.Tuple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -86,5 +87,11 @@ public class TweetServiceImpl implements TweetService {
     public int[] insertTweetsTexts(List<TweetText> tweetsTexts) {
         return tweetDao.insertTweetsTexts(tweetsTexts);
     }
+
+    @Override
+    public List<Triplet> getConflictsWithCoordinate() {
+        return tweetDao.getConflictsWithCoordinate();
+    }
+
 
 }

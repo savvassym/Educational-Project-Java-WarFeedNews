@@ -2,7 +2,9 @@ package com.WarNewsFeed.wnf.backend.dao;
 
 import com.WarNewsFeed.wnf.backend.model.Tweet;
 import com.WarNewsFeed.wnf.backend.model.TweetText;
+import com.WarNewsFeed.wnf.helpers.Triplet;
 import com.WarNewsFeed.wnf.helpers.Tuple;
+import edu.stanford.nlp.util.Triple;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -21,4 +23,5 @@ public interface TweetDao {
     List<TweetText> getAllTweetText();
     int insertTweetText(TweetText text);
     int [] insertTweetsTexts(List<TweetText> tweetsTexts);
+    List<Triplet> getConflictsWithCoordinate();
 }

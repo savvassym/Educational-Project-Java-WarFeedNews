@@ -15,6 +15,7 @@ import org.springframework.context.ApplicationContext;
 import twitter4j.TwitterException;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class WnfApplication {
 	@Autowired
 	Tokenizer tokenizer;
 
-	public static void main(String[] args) throws TwitterException{
+	public static void main(String[] args) throws TwitterException, ParseException {
 		ApplicationContext context = SpringApplication.run(WnfApplication.class, args);
 		TweetService tweetService = context.getBean(TweetService.class);
 		Nlp filter  = context.getBean(Nlp.class);
@@ -37,6 +38,7 @@ public class WnfApplication {
 
         GeocodeApi geocodeApi = new GeocodeApi();
 		String coordinates;
+		Notification notification = new Notification();
 		TwitterApi twitterApi = new TwitterApi();
         TwitterApiService twitterApiService = new TwitterApiService(twitterApi);
         List<String> tweetTexts = twitterApiService.getTweets();
@@ -81,6 +83,7 @@ public class WnfApplication {
             System.out.println( row +" , "+ count.get(row));
         }
 
+        notification.notifyUser(tweetService,count);
 
 
     }

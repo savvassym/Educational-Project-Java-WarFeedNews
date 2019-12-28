@@ -3,6 +3,7 @@ package com.WarNewsFeed.wnf.backend.controller;
 import com.WarNewsFeed.wnf.WnfApplication;
 import com.WarNewsFeed.wnf.backend.model.Tweet;
 import com.WarNewsFeed.wnf.backend.service.TweetService;
+import com.WarNewsFeed.wnf.helpers.Triplet;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -74,6 +75,12 @@ public class TweetControllerTest {
         Assert.assertTrue(res.size()>0);
     }
 
+    @Test
+    public void getConflictsWithCoordinates() {
+        List<Triplet> res = service.getConflictsWithCoordinate();
+        Assert.assertTrue(res.size()>0);
+    }
+
 
     @After
     public void tearDown()
@@ -81,5 +88,6 @@ public class TweetControllerTest {
         SpringApplication.exit(context, ()->0);
 
     }
+
 
 }

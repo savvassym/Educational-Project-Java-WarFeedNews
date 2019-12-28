@@ -4,6 +4,7 @@ import com.WarNewsFeed.wnf.WnfApplication;
 import com.WarNewsFeed.wnf.backend.model.Tweet;
 import com.WarNewsFeed.wnf.backend.model.TweetText;
 import com.WarNewsFeed.wnf.backend.service.TweetService;
+import com.WarNewsFeed.wnf.helpers.Triplet;
 import com.WarNewsFeed.wnf.helpers.Tuple;
 import org.junit.*;
 import org.junit.runner.RunWith;
@@ -151,6 +152,14 @@ public class TweetServiceImplTest{
         Assert.assertArrayEquals(expected,actual);
     }
 
+    @Test
+    public void getConflictsWithCoordinate() {
+        Tweet tweet = new Tweet("15","Lithuania",Timestamp.valueOf("2019-12-22 16:16:24.54"),"38.9597594  34.9249653");
+        Tweet tweet1 = new Tweet("16","Iraq",Timestamp.valueOf("2019-12-22 16:16:24.54"),"33.0955793  44.1749775");
+        service.insertTweets(List.of(tweet,tweet));
+        List<Triplet> result = service.getConflictsWithCoordinate();
+        Assert.assertTrue(result.size()>0);
+    }
 
 
     @After
@@ -158,5 +167,6 @@ public class TweetServiceImplTest{
     {
         SpringApplication.exit(context, () -> 0);
     }
+
 
 }

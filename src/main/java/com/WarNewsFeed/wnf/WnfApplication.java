@@ -7,6 +7,7 @@ import com.WarNewsFeed.wnf.backend.nlp.Nlp;
 import com.WarNewsFeed.wnf.backend.nlp.Tokenizer;
 import com.WarNewsFeed.wnf.backend.service.TweetService;
 import com.WarNewsFeed.wnf.backend.service.TwitterApiService;
+import com.WarNewsFeed.wnf.helpers.Triplet;
 import com.WarNewsFeed.wnf.helpers.Tuple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -82,6 +83,7 @@ public class WnfApplication {
         for (Object row : count.keySet()) {
             System.out.println( row +" , "+ count.get(row));
         }
+
 
         notification.notifyUser(tweetService,count);
 

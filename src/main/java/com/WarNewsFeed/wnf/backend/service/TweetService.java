@@ -2,6 +2,7 @@ package com.WarNewsFeed.wnf.backend.service;
 
 import com.WarNewsFeed.wnf.backend.model.Tweet;
 import com.WarNewsFeed.wnf.backend.model.TweetText;
+import com.WarNewsFeed.wnf.helpers.Triplet;
 import com.WarNewsFeed.wnf.helpers.Tuple;
 
 import java.sql.Timestamp;
@@ -21,4 +22,5 @@ public interface TweetService {
     List<TweetText> getAllTweetText();
     int insertTweetText(TweetText text);
     int [] insertTweetsTexts(List<TweetText> tweetsTexts);
+    List<Triplet> getConflictsWithCoordinate();
 }

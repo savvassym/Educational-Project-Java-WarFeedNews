@@ -3,7 +3,9 @@ package com.WarNewsFeed.wnf.backend.dao.impl;
 import com.WarNewsFeed.wnf.backend.dao.TweetDao;
 import com.WarNewsFeed.wnf.backend.model.Tweet;
 import com.WarNewsFeed.wnf.backend.model.TweetText;
+import com.WarNewsFeed.wnf.helpers.Triplet;
 import com.WarNewsFeed.wnf.helpers.Tuple;
+import edu.stanford.nlp.util.Triple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
@@ -200,4 +202,20 @@ public class TweetDaoImpl extends JdbcDaoSupport implements TweetDao {
         });
         return k;
     }
+
+    @Override
+    public List<Triplet> getConflictsWithCoordinate() {
+        String sql = "SELECT TWEET.COUNTRY,COORDINATES, COUNT(*) AS CONFLICTS FROM TWEET GROUP BY COUNTRY,COORDINATES" ;
+        assert getJdbcTemplate() != null;
+        List <Map<String,Object>> queryRow = getJdbcTemplate().queryForList(sql);
+        List<Triplet> result = new ArrayList<>();
+        for(Map<String,Object> row : queryRow){
+            Triplet triplet = new Triplet(row.get("country"),row.get("conflicts"),row.get("coordinates"));
+            result.add(triplet);
+        }
+
+        return result;
+    }
+
+
 }

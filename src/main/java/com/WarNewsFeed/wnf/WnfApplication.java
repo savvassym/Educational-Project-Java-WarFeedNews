@@ -53,14 +53,6 @@ public class WnfApplication {
         }
 
 
-
-//        for (Tuple tp : collection){
-//            System.out.println(tp.toString());
-//            if(tp.val2=="COUNTRY"){
-//                countries.add(String.valueOf(tp.val1));
-//            }
-//        }
-
         for(int i=0;i<collection.size();i++){
             int k = i+1;
             int index;

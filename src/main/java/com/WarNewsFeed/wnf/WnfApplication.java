@@ -27,14 +27,12 @@ public class WnfApplication {
 	TweetService tweetService;
 	@Autowired
     Nlp filter;
-	@Autowired
-	Tokenizer tokenizer;
 
-	public static void main(String[] args) throws TwitterException, ParseException {
+
+	public static void main(String[] args) throws ParseException {
 		ApplicationContext context = SpringApplication.run(WnfApplication.class, args);
 		TweetService tweetService = context.getBean(TweetService.class);
 		Nlp filter  = context.getBean(Nlp.class);
-        Tokenizer tokenizer = context.getBean(Tokenizer.class);
 
         GeocodeApi geocodeApi = new GeocodeApi();
 		String coordinates;
@@ -55,7 +53,6 @@ public class WnfApplication {
 
         for(int i=0;i<collection.size();i++){
             int k = i+1;
-            int index;
             System.out.println(collection.get(i));
             if (collection.get(i).val2.equals("COUNTRY")){
                 if(collection.get(k).val2.equals("COUNTRY")){

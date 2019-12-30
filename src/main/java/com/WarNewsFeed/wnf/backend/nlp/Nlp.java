@@ -41,7 +41,7 @@ public class Nlp {
 
     private static StanfordCoreNLP propInit(){
         Properties props = new Properties();
-        props.setProperty("annotators", "tokenize, ssplit, pos, lemma, ner, parse,dcoref");
+        props.setProperty("annotators", "tokenize, ssplit, pos, lemma, ner, parse");
         return new StanfordCoreNLP(props);
     }
 

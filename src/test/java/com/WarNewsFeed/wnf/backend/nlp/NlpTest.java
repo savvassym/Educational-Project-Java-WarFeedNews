@@ -37,4 +37,19 @@ public class NlpTest {
         Assert.assertEquals(expected,actual);
     }
 
+
+    //ITS A BUG :D
+    @Test
+    public void ProblemOnNlpThatRecognizeNorthAsCountryWhenFoundOnASentence(){
+        List<Tuple<String,String>> actual;
+        Nlp nlp = new Nlp();
+        actual = nlp.analyzer("North Korea");
+        Tuple<String,String> tp = new Tuple<>("North","COUNTRY");
+        Tuple<String,String> tp1 = new Tuple<>("Korea","COUNTRY");
+        List<Tuple<String,String>> expected = new ArrayList<>();
+        expected.add(tp);
+        expected.add(tp1);
+        Assert.assertEquals(expected,actual);
+    }
+
 }

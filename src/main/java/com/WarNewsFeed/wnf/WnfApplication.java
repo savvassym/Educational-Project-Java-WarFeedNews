@@ -7,7 +7,6 @@ import com.WarNewsFeed.wnf.backend.nlp.Nlp;
 import com.WarNewsFeed.wnf.backend.nlp.Tokenizer;
 import com.WarNewsFeed.wnf.backend.service.TweetService;
 import com.WarNewsFeed.wnf.backend.service.TwitterApiService;
-import com.WarNewsFeed.wnf.helpers.Triplet;
 import com.WarNewsFeed.wnf.helpers.Tuple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -54,12 +53,28 @@ public class WnfApplication {
         }
 
 
-        for (Tuple tp : collection){
-            System.out.println(tp.toString());
-            if(tp.val2=="COUNTRY"){
-                countries.add(String.valueOf(tp.val1));
+
+//        for (Tuple tp : collection){
+//            System.out.println(tp.toString());
+//            if(tp.val2=="COUNTRY"){
+//                countries.add(String.valueOf(tp.val1));
+//            }
+//        }
+
+        for(int i=0;i<collection.size();i++){
+            int k = i+1;
+            int index;
+            System.out.println(collection.get(i));
+            if (collection.get(i).val2.equals("COUNTRY")){
+                if(collection.get(k).val2.equals("COUNTRY")){
+                    countries.add(collection.get(i).val1+" "+ collection.get(k).val1);
+                    i=k;
+                    continue;
+                }
+                countries.add(collection.get(i).val1);
             }
         }
+
 
 
         for(String cs : countries){
@@ -89,5 +104,6 @@ public class WnfApplication {
 
 
     }
+
 
 }

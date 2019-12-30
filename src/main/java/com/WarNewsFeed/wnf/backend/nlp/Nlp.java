@@ -30,7 +30,7 @@ public class Nlp {
             List<CoreMap> sentences = document.get(CoreAnnotations.SentencesAnnotation.class);
             for (CoreMap sentence : sentences) {
                 for (CoreLabel tokens : sentence.get(CoreAnnotations.TokensAnnotation.class)) {
-                    Tuple<String, String> tuple = new Tuple<>(tokens.getString(CoreAnnotations.TextAnnotation.class),
+                    Tuple<String, String> tuple = new Tuple<>(tokens.get(CoreAnnotations.TextAnnotation.class),
                             tokens.get(CoreAnnotations.NamedEntityTagAnnotation.class));
                     collect.add(tuple);
                 }
@@ -41,7 +41,7 @@ public class Nlp {
 
     private static StanfordCoreNLP propInit(){
         Properties props = new Properties();
-        props.setProperty("annotators", "tokenize, ssplit, pos, lemma, ner,parse");
+        props.setProperty("annotators", "tokenize, ssplit, pos, lemma, ner, parse,dcoref");
         return new StanfordCoreNLP(props);
     }
 
